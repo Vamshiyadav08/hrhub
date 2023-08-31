@@ -1,0 +1,10 @@
+.layout-components{
+    display: flex;
+    margin-top: 8vh;
+}
+.layout-section{
+    width: 20vw;
+}
+.layout-outlet{
+    width: 90vw;
+}
