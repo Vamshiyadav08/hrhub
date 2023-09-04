@@ -19,6 +19,8 @@ import HomeLayout from './Layout/HomeLayout/HomeLayout';
 import { AttendenceProvider } from './Context';
 import Bank from './components/HomeComponent/DashboardContent/Bank/Bank';
 import Admin from './pages/Admin/Admin';
+import PageNotFound from './components/Common/PageNotFound';
+import Search from './components/Common/Topbar/Search/Search';
 
 function App() {
   return (
@@ -40,7 +42,10 @@ function App() {
             <Route path="/attendence" element={<Attendence/>}></Route>
             <Route path="/organizationchart" element={<OrganizationChart/>}></Route>
             <Route path="/admin" element={<Admin/>}></Route>
+            <Route path='/search' element={<Search/>}/>
+            <Route path='*' element={<PageNotFound/>}/>
           </Route>
+          
         </Routes>
       </AttendenceProvider>
       <ToastContainer/>

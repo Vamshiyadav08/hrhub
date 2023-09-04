@@ -76,7 +76,7 @@ export default function Topbar() {
       // An error happened.
     });
   }
-  const getData=async()=>{
+  const getData=async(searchedValue)=>{
     const querySnapshot = await getDocs(collection(db, "companyusers"));
     const data = [];
     querySnapshot.forEach((doc) => {
@@ -84,18 +84,16 @@ export default function Topbar() {
     });
     
     contextData.searchUserData(
-     data,searchInput
+     data,searchedValue
     );
   }
   
   const handleInput=(event)=>{
     setSearchInput(event.target.value)
     if(event.key ==="Enter"){
-      getData()
+      getData(event.target.value)
     }
   }
- 
- 
   return (
     <header className="header">
       <div className="header-logo">
@@ -163,7 +161,6 @@ export default function Topbar() {
         <button className="hamburger-btn" onClick={handlehamburger}>
           <GiHamburgerMenu/>
         </button>
-        
       </div>
     </header>
   );
