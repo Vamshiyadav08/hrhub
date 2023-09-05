@@ -1,33 +1,31 @@
-import React, {  useState, useContext } from "react";
-import {  useNavigate } from "react-router-dom";
-import {db} from "../../../firebaseConfig";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { db } from "../../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 
 import "./topbar.css";
 import { AiOutlineSearch } from "react-icons/ai";
-import {BiSolidDownArrow} from "react-icons/bi";
-import {GiHamburgerMenu} from "react-icons/gi";
+import { BiSolidDownArrow } from "react-icons/bi";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { AttendenceContext } from "../../../Context";
 import { getAuth, signOut } from "firebase/auth";
 
 const auth = getAuth();
 
-
 export default function Topbar() {
   //changing the classname using setisfocused to perform styles
   const [isFocused, setIsFocused] = useState(false);
   const [CheckIn, setCheckIn] = useState(false);
-  const [showDropdown ,setdropdown] =useState(false);
-  const [searchInput,setSearchInput] = useState("")
-  const [hamburgerbtn,sethamburgerBtn] = useState(false);
+  const [showDropdown, setdropdown] = useState(false);
+  const [hamburgerbtn, sethamburgerBtn] = useState(false);
 
   const contextData = useContext(AttendenceContext);
 
   const [time, setTime] = useState("");
-  const handlehamburger=()=>{ 
-    sethamburgerBtn(!hamburgerbtn)
-    contextData.hamburgerContext(!hamburgerbtn)
-  }
+  const handlehamburger = () => {
+    sethamburgerBtn(!hamburgerbtn);
+    contextData.hamburgerContext(!hamburgerbtn);
+  };
 
   const handleTimeIn = () => {
     const now = new Date();
@@ -41,7 +39,7 @@ export default function Topbar() {
     if (time === "" && checked === false) {
       checkTimeLabel = "";
     }
-    
+
     if (checked) {
       checkTimeLabel = "Last In : ";
     }
@@ -58,9 +56,9 @@ export default function Topbar() {
     setCheckIn(checked);
   };
 
-  const handledropdown=()=>{
-    setdropdown(!showDropdown)
-  }
+  const handledropdown = () => {
+    setdropdown(!showDropdown);
+  };
 
   let navigate = useNavigate();
   //navigate to profile
@@ -69,31 +67,30 @@ export default function Topbar() {
   };
 
   //logout
-  const handleLogout=async()=>{
-    signOut(auth).then(() => {
-      navigate("./login",{replace:true})
-    }).catch((error) => {
-      // An error happened.
-    });
-  }
-  const getData=async(searchedValue)=>{
+  const handleLogout = async () => {
+    signOut(auth)
+      .then(() => {
+        navigate("./login", { replace: true });
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+  const getData = async (searchedValue) => {
     const querySnapshot = await getDocs(collection(db, "companyusers"));
     const data = [];
     querySnapshot.forEach((doc) => {
-      data.push({ id: doc.id, ...doc.data() }); 
+      data.push({ id: doc.id, ...doc.data() });
     });
-    
-    contextData.searchUserData(
-     data,searchedValue
-    );
-  }
-  
-  const handleInput=(event)=>{
-    setSearchInput(event.target.value)
-    if(event.key ==="Enter"){
-      getData(event.target.value)
+
+    contextData.searchUserData(data, searchedValue);
+  };
+
+  const handleInput = (event) => {
+    if (event.key === "Enter") {
+      getData(event.target.value);
     }
-  }
+  };
   return (
     <header className="header">
       <div className="header-logo">
@@ -122,7 +119,6 @@ export default function Topbar() {
             name="search"
             placeholder="Search Employee"
             onKeyDown={handleInput}
-         
           />
         </div>
         <div className="topbar-btn-container">
@@ -144,7 +140,10 @@ export default function Topbar() {
               <span>Associate SharePointDeveloper</span>
             </div>
             <div className="arrow-icon">
-              <BiSolidDownArrow className={`arrow ${showDropdown ? "up" : "down"}`} onClick={handledropdown}/>
+              <BiSolidDownArrow
+                className={`arrow ${showDropdown ? "up" : "down"}`}
+                onClick={handledropdown}
+              />
             </div>
           </div>
           {showDropdown && (
@@ -159,7 +158,7 @@ export default function Topbar() {
           )}
         </div>
         <button className="hamburger-btn" onClick={handlehamburger}>
-          <GiHamburgerMenu/>
+          <GiHamburgerMenu />
         </button>
       </div>
     </header>

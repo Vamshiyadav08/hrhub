@@ -1,11 +1,10 @@
-import React,{useEffect} from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Outlet,useNavigate} from "react-router-dom";
 import "./layout.css";
-import Topbar from '../components/Common/Topbar/Topbar';
-import Leftbar from '../components/Common/LeftBar/Leftbar';
+import Topbar from "../components/Common/Topbar/Topbar";
+import Leftbar from "../components/Common/LeftBar/Leftbar";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { useNavigate } from "react-router-dom";
 
 export default function LayoutContainer() {
   const navigate = useNavigate();
@@ -13,21 +12,21 @@ export default function LayoutContainer() {
   useEffect(() => {
     onAuthStateChanged(auth, (res) => {
       if (res === null) {
-        navigate("/login",{replace:true});
+        navigate("/login", { replace: true });
       }
     });
-  }, [navigate ]);
+  }, [navigate]);
   return (
-    <div className='layout-container'>
-        <Topbar />
-        <div className='layout-components'>
-          <div className='layout-section'>
-            <Leftbar/>
-          </div>
-           <div className='layout-outlet'>
-              <Outlet/>
-           </div>
+    <div className="layout-container">
+      <Topbar />
+      <div className="layout-components">
+        <div className="layout-section">
+          <Leftbar />
         </div>
+        <div className="layout-outlet">
+          <Outlet />
+        </div>
+      </div>
     </div>
-  )
+  );
 }

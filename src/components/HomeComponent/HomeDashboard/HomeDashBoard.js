@@ -12,24 +12,31 @@ const navItems = [
 ];
 
 export default function HomeDashBoard() {
-    const [activeTab,setActiveTab] = useState(null)
-    const handleBtn=(clickedElement)=>{
-        setActiveTab(clickedElement)
-    }
+  const [activeTab, setActiveTab] = useState(null);
+  const handleBtn = (clickedElement) => {
+    setActiveTab(clickedElement);
+  };
   return (
     <main className="home-component">
       <aside className="home-container">
         <nav className="home-nav">
           <ul>
-            {
-              navItems.map((eachItem)=>(
-                  <li key={eachItem.id} className={`home-nav-list ${activeTab===eachItem.id?"active-tab":""} `}>
-                    <Link to={eachItem.id} className="home-nav-link" onClick={()=>handleBtn(eachItem.id)}>
-                     {eachItem.label}
-                    </Link>
-                   </li>
-              ))
-            }
+            {navItems.map((eachItem) => (
+              <li
+                key={eachItem.id}
+                className={`home-nav-list ${
+                  activeTab === eachItem.id ? "active-tab" : ""
+                } `}
+              >
+                <Link
+                  to={eachItem.id}
+                  className="home-nav-link"
+                  onClick={() => handleBtn(eachItem.id)}
+                >
+                  {eachItem.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </aside>

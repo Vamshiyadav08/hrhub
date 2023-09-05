@@ -1,19 +1,10 @@
 import React, { useContext, useState } from "react";
-import { AiFillDashboard } from "react-icons/ai";
-import { AiFillHome } from "react-icons/ai";
-import { BsFillAlarmFill } from "react-icons/bs";
-import { FaUserShield } from "react-icons/fa";
-import { AiFillCreditCard } from "react-icons/ai";
+import { AiFillDashboard, AiFillCreditCard, AiFillHome } from "react-icons/ai";
+import { BsFillAlarmFill, BsHourglassSplit, BsCash } from "react-icons/bs";
+import { FaUserShield, FaBook, FaUsers,FaCubes,FaChalkboardTeacher } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FaCubes } from "react-icons/fa";
-import { BsCash } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
-import { BsHourglassSplit } from "react-icons/bs";
-import { FaChalkboardTeacher } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa";
-import { BiHistory } from "react-icons/bi";
-import { FaBook } from "react-icons/fa";
-import { BiEdit } from "react-icons/bi";
+import { BiHistory, BiEdit } from "react-icons/bi";
 import { AttendenceContext } from "../../../Context";
 import "../Topbar/topbar.css";
 import "./leftbar.css";
@@ -65,6 +56,7 @@ export default function Leftbar() {
             >
               <Link
                 to={eachItem.id==="dashboard"?"/":eachItem.id==="home"?"home/profile":eachItem.id}
+                
                 className="aside-nav-link"
                 onClick={() => handleBtn(eachItem.id)}
               >

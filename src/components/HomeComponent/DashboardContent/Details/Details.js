@@ -4,12 +4,11 @@ import "react-phone-input-2/lib/style.css";
 import "./details.css";
 import { db } from "../../../../firebaseConfig";
 
-import { doc, setDoc,getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 export default function Details() {
-
-  const [data,setData] = useState({
+  const [data, setData] = useState({
     title: "",
     firstname: "",
     lastname: "",
@@ -24,7 +23,7 @@ export default function Details() {
     linkedin: "",
     adress: "",
     role: "",
-  })
+  });
 
   const handleChangeEvent = (event) => {
     const { name, value } = event.target;
@@ -33,34 +32,33 @@ export default function Details() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if(data.name && data.personalemail && data.mobile){
-        try {
-          await setDoc(doc(db, "userDetails", "id1"), data);
-          console.log("Added");
-        } catch (error) {
-          console.log(error);
-        }
-      }else{
-        toast.error("Enter the Required Feilds")
+    if (data.name && data.personalemail && data.mobile) {
+      try {
+        await setDoc(doc(db, "userDetails", "id1"), data);
+        console.log("Added");
+      } catch (error) {
+        console.log(error);
       }
+    } else {
+      toast.error("Enter the Required Feilds");
     }
-    
-  useEffect(()=>{
-    const getDataFromFirebase = async()=>{
-        try{
-          const docRef = doc(db, "userDetails", "id1");
-          const docSnap = await getDoc(docRef);
-          if(docSnap.exists()){
-            let dbData = docSnap.data()
-            setData(dbData)
-          }
-          
-        }catch(error){
-          console.log(error)
+  };
+
+  useEffect(() => {
+    const getDataFromFirebase = async () => {
+      try {
+        const docRef = doc(db, "userDetails", "id1");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          let dbData = docSnap.data();
+          setData(dbData);
         }
-    }
-    getDataFromFirebase()
-  },[])
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDataFromFirebase();
+  }, []);
 
   return (
     <div className="details-container">
@@ -103,7 +101,6 @@ export default function Details() {
               type="text"
               onChange={handleChangeEvent}
               className="form-input"
-              
             />
           </div>
           <div className="input-container">
@@ -208,9 +205,9 @@ export default function Details() {
               <PhoneInput
                 country={"us"}
                 name="mobile"
-                value = "mobile"
+                value="mobile"
                 onChange={(value) =>
-                  handleChangeEvent({ target: { name: "mobile" } }, value)
+                  handleChangeEvent({ target: { name: "mobile" } })
                 }
               />
             </div>
@@ -226,7 +223,7 @@ export default function Details() {
                 name="workphone"
                 value="workphone"
                 onChange={(value) =>
-                  handleChangeEvent({ target: { name: "workphone" } }, value)
+                  handleChangeEvent({ target: { name: "workphone" } })
                 }
               />
             </span>

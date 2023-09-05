@@ -6,10 +6,9 @@ import {
   subWeeks,
 } from "date-fns";
 import React, {  useState } from "react";
-import { BiSolidLeftArrow } from "react-icons/bi";
-import { BiSolidRightArrow } from "react-icons/bi";
+import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 import { MdArrowRight } from "react-icons/md";
-
+import { nanoid } from "nanoid";
 import "./attendence.css";
 
 export default function Attendence() {
@@ -76,11 +75,12 @@ export default function Attendence() {
         </div>
         <div>
           <div className="attendence-dates">
+          <ul className="attendence-list-container">
             {weekDays.map((eachDay, index) =>
               (
               
-                <ul className="attendence-list-container">
-                  <li key={index} className="attendence-list">
+               
+                  <li key={nanoid()} className="attendence-list" id={index}>
                     <p>
                     {eachDay.toLocaleDateString("en-US", {
                         year: "numeric",
@@ -92,9 +92,8 @@ export default function Attendence() {
                     <progress value="100" max="100" className={`progress-bar${eachDay.toDateString()===date.toDateString()?"attendece-progress-bar":""}`}></progress>
                     <p>9:20</p>
                   </li>
-                </ul>
-              
             ))}
+             </ul>
           </div>
         </div>
       </div>

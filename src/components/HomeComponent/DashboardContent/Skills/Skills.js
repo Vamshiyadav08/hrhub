@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiFillStar } from "react-icons/ai";
-import { nanoid } from 'nanoid'
+import { nanoid } from "nanoid";
 
 import "./skills.css";
-import { set } from "date-fns";
 
 export default function Skills() {
   const [inputstate, SetInput] = useState("");
@@ -16,39 +15,38 @@ export default function Skills() {
       rating: 0,
     },
   ]);
-  
+
   const handleChange = (event) => {
     SetInput(event.target.value);
   };
 
   const handleDelete = (uniqueid) => {
     // console.log(uniqueid)
-    let updatedArr = dataArray.filter((eachele)=>{return (eachele.id!==uniqueid)})
-    setdataArray(updatedArr)
+    let updatedArr = dataArray.filter((eachele) => {
+      return eachele.id !== uniqueid;
+    });
+    setdataArray(updatedArr);
   };
   function saveInput(index) {
     const updatedArr = [...dataArray];
     if (updatedArr.length - 1 === index) {
       updatedArr[index].text = inputstate;
-      updatedArr.push({id:nanoid(),text: "", rating: 0 });
+      updatedArr.push({ id: nanoid(), text: "", rating: 0 });
       setdataArray(updatedArr);
-      
     } else {
       updatedArr[index].text = inputstate;
       setdataArray(updatedArr);
-     
     }
   }
 
   const removeInput = (index) => {
-    const clickedData = [...dataArray];
-    clickedData[index].text = "";
+    dataArray[index].text = "";
   };
 
   const handleStar = (index, starIndex) => {
-    console.log(index,starIndex);
+    console.log(index, starIndex);
     const updatedArr = [...dataArray];
-    console.log(updatedArr)
+    console.log(updatedArr);
     updatedArr[index].rating = starIndex;
     setdataArray(updatedArr);
   };
@@ -56,10 +54,10 @@ export default function Skills() {
   return (
     <div className="skills">
       <h3>Skills</h3>
-      {dataArray.map((eachEle,index) => {
+      {dataArray.map((eachEle, index) => {
         const uniqueid = eachEle.id;
-        return(
-          <div className="skills-section" key={uniqueid} >
+        return (
+          <div className="skills-section" key={uniqueid}>
             <input
               type="text"
               className={`skills-input ${isFocused ? "skills-focused" : ""}`}
@@ -67,7 +65,6 @@ export default function Skills() {
               onChange={handleChange}
               onFocus={() => SetIsFocused(true)}
               onBlur={() => SetIsFocused(false)}
-              // value={eachEle.text}
             />
             <div className="skills-star-section">
               {[0, 1, 2, 3].map((starIndex) => {
@@ -82,13 +79,14 @@ export default function Skills() {
                     />
                     {
                       <AiFillStar
-                      className="skills-star"
-                      color={
-                        currentRating <= dataArray[index].rating
-                          ? "#005580"
-                          : "#AEC9DF"
-                      }
-                    /> }
+                        className="skills-star"
+                        color={
+                          currentRating <= dataArray[index].rating
+                            ? "#005580"
+                            : "#AEC9DF"
+                        }
+                      />
+                    }
                   </label>
                 );
               })}
@@ -116,9 +114,8 @@ export default function Skills() {
               </div>
             )}
           </div>
-        )
-      }
-      )}
+        );
+      })}
     </div>
   );
 }
