@@ -5,6 +5,7 @@ export default function OrganizationChart() {
   const [clickBoard,setBoard] =useState(false)
   const [clickDirectorA,setDirectorA] =useState(false)
   const [clickDirectorB,setDirectorB] =useState(false)
+  const [clickVicePresident,setVicePresident] = useState(false)
 
   const handleBoard=(()=>{
     
@@ -23,7 +24,9 @@ export default function OrganizationChart() {
   const handleDirectorB=(()=>{
     setDirectorB(!clickDirectorB)
   })
- 
+ const handleVicePresident=(()=>{
+    setVicePresident(!clickVicePresident)
+ })
 
   return (
     <div className="organization-container" >
@@ -43,25 +46,63 @@ export default function OrganizationChart() {
         </thead>
         <tbody>
             <tr className={`node ${clickBoard?"active":"hide"}`}>
-              <td >
-                  <div className={`node ${clickDirectorA?"active":"hide"}`} onClick={handleDirectorA}>
+              <th>
+                  <div onClick={handleDirectorA}>
                     <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="" />
                     <h3>Akhilesh</h3>
                     <p>Director</p>
                     <p>Director</p>
                     <p>Full Time</p>
                   </div>
-                </td>
-                <td>
-                  <div className={`node ${clickDirectorB?"active":"hide"}`}  onClick={handleDirectorB}>
+                </th>
+                <th>
+                  <div onClick={handleDirectorB}>
                     <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="" />
                     <h3>Harish Kumar</h3>
                     <p>Director</p>
                     <p>Director</p>
                     <p>Full Time</p>
                   </div>
-                </td>
+                </th>
             </tr>
+            <tr className={`node ${clickDirectorA?"active":"hide"}`} >
+                    <>
+                      <td>
+                        <div onClick={handleVicePresident}>
+                          <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="" />
+                          <h3>Mansoor</h3>
+                          <p>Director</p>
+                          <p>Director</p>
+                          <p>Full Time</p>
+                        </div>
+                      </td>
+                      <td>
+                        <table>
+                          <tr className={`node ${clickVicePresident?"active":"hide"}`}>
+                            <td>
+                                <div >
+                                  <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="" />
+                                  <h3>dhanush</h3>
+                                  <p>Director</p>
+                                  <p>Director</p>
+                                  <p>Full Time</p>
+                                </div>
+                            </td>
+                            <td>
+                              <div >
+                                <img src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png" alt="" />
+                                <h3>Pranothi</h3>
+                                <p>Director</p>
+                                <p>Director</p>
+                                <p>Full Time</p>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </>
+                    
+                </tr>
         </tbody>
         
       </table>
