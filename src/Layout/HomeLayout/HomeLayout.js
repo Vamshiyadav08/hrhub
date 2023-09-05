@@ -11,7 +11,7 @@ export default function HomeLayout() {
       <div className="home-layout">
         <Home />
         <div className="home-outlet-container">
-          <Outlet />
+          <Outlet/>
         </div>
       </div>
     </div>

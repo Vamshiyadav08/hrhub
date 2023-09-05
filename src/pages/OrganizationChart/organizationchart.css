@@ -1,0 +1,25 @@
+.organization-container{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  font-size: .8em;
+  overflow: auto;
+  height: 100%;
+}
+.node{
+    text-align: center;
+}
+.node img{
+    width: 3em;
+}
+.active{
+    display: inline-block;
+}
+.hide{
+    display: none;
+}
+tbody tr{
+    border: 1px solid red;
+    width: 90px;
+    height: 90px;
+}
