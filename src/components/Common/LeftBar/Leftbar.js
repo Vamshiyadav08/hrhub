@@ -14,6 +14,7 @@ const navItems = [
   { id: "home", label: "My Home", icon: <AiFillHome /> },
   { id: "attendence", label: "Attendance", icon: <BsFillAlarmFill /> },
   { id: "calender", label: "Calendar", icon: <SlCalender /> },
+  { id: "organizationchart", label: "Organizational Chart", icon: <FaUsers /> },
   { id: "leaves", label: "Leaves", icon: <FaUserShield /> },
   { id: "expence", label: "Expense", icon: <AiFillCreditCard /> },
   { id: "compensation", label: "Compensation", icon: <BsCash /> },
@@ -23,7 +24,6 @@ const navItems = [
   { id: "training", label: "Training", icon: <FaChalkboardTeacher /> },
   { id: "forms", label: "Forms", icon: <BiEdit /> },
   { id: "policies", label: "Policies", icon: <FaBook /> },
-  { id: "organizationchart", label: "Organizational Chart", icon: <FaUsers /> },
   { id: "History", label: "History", icon: <BiHistory /> },
   { id: "admin", label: "Admin", icon: <BiHistory /> },
 ];
