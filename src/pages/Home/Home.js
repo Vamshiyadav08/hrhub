@@ -8,7 +8,6 @@ import HomeDashBoard from "../../components/HomeComponent/HomeDashboard/HomeDash
 
 export default function Home() {
   const navigate = useNavigate();
-
   useEffect(() => {
     onAuthStateChanged(auth, (res) => {
       if (res === null) {

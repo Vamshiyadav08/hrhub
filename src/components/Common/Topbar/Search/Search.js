@@ -4,8 +4,9 @@ import "./search.css";
 import { useNavigate } from 'react-router-dom/dist';
 
 export default function Search() {
-  const {searchData} = useContext(AttendenceContext)
-  console.log(searchData)
+  const {searchData,hamburgerData,theme} = useContext(AttendenceContext)
+ console.log(hamburgerData,"hamburger")
+ console.log(theme,"theme")
   const navigate = useNavigate();
   const handlenavigate=()=>{
     navigate("/home/profile")

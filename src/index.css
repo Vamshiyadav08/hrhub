@@ -9,12 +9,16 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.dark-theme{
+  background-color: #101418 !important;
+  color: #66B2FF;
+  border-bottom: 1px solid #c5d0dc;
+}
 .hamburger-btn{
   display: none;
 }
-@media (max-width:760px){
-  
-}
+
 @media (max-width:759px)
 {
   .profile-topbar-container{
@@ -24,10 +28,10 @@ body {
     display: inline-block;
   }
   
-  .aside-container-check{
+  .aside-container-active{
     display: block;
   }
-  .aside-container-ch{
+  .aside-container-hide{
     display: none;
   }
 }

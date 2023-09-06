@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
@@ -9,6 +9,9 @@ import { BiSolidDownArrow } from "react-icons/bi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AttendenceContext } from "../../../Context";
 import { getAuth, signOut } from "firebase/auth";
+import "react-toggle/style.css";
+import Toggle from 'react-toggle';
+
 
 const auth = getAuth();
 
@@ -18,8 +21,16 @@ export default function Topbar() {
   const [CheckIn, setCheckIn] = useState(false);
   const [showDropdown, setdropdown] = useState(false);
   const [hamburgerbtn, sethamburgerBtn] = useState(false);
+  const [theme,setTheme] = useState(false);
 
   const contextData = useContext(AttendenceContext);
+
+  const handletheme=((event)=>{
+    console.log(event.target.checked,"top")
+    setTheme(event.target.checked)
+    contextData.themeContext(event.target.checked)
+    
+  })
 
   const [time, setTime] = useState("");
   const handlehamburger = () => {
@@ -128,6 +139,15 @@ export default function Topbar() {
 
           <span className="topbar-btn-checkLabel">{time}</span>
         </div>
+        <div>
+          <label>
+            <Toggle
+            icons={false}
+            onChange={handletheme}
+            />
+          </label>
+        </div>
+        
         <div className="profile-topbar-container">
           <div>
             <img

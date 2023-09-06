@@ -4,12 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 import App from "./App";
+import { AttendenceProvider } from "./Context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <AttendenceProvider>
       <App />
+    </AttendenceProvider>
+      
     </BrowserRouter>
   </React.StrictMode>
 );

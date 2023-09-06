@@ -35,13 +35,13 @@ export default function Leftbar() {
     console.log("clicked");
     setActiveTab(clickedElement);
   };
-  const { hamburgerData } = useContext(AttendenceContext);
-  console.log(hamburgerData);
+  const { hamburgerData,theme } = useContext(AttendenceContext);
+  
 
   return (
     <aside
-      className={`aside-container ${
-        hamburgerData ? "aside-container-check" : "aside-container-ch"
+      className={`${theme?"dark-theme": "aside-container"} ${
+        hamburgerData ? "aside-container-active" : "aside-container-hide"
       }`}
     >
       <nav className="aside-nav">

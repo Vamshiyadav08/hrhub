@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import React from "react";
+import React, { useContext, useEffect,useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/Login/Login";
@@ -15,18 +15,18 @@ import Education from "./components/HomeComponent/DashboardContent/Education/Edu
 import Family from "./components/HomeComponent/DashboardContent/Family/Family";
 import OrganizationChart from "./pages/OrganizationChart/OrganizationChart";
 import HomeLayout from "./Layout/HomeLayout/HomeLayout";
-import { AttendenceProvider } from "./Context";
 import Bank from "./components/HomeComponent/DashboardContent/Bank/Bank";
 import Admin from "./pages/Admin/Admin";
 import PageNotFound from "./components/Common/PageNotFound";
 import Search from "./components/Common/Topbar/Search/Search";
 import MyCalender from "./pages/Calender/Calender";
-
-
+import { AttendenceContext,AttendenceProvider } from "./Context";
 function App() {
+ 
+  const {theme} = useContext(AttendenceContext)
+
   return (
-    <div className="App">
-      <AttendenceProvider>
+    <div className={`${theme&&"dark-theme"}`}>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<LayoutContainer />}>
@@ -51,7 +51,7 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
-      </AttendenceProvider>
+      {/* </AttendenceProvider> */}
       <ToastContainer />
     </div>
   );
