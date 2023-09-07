@@ -11,15 +11,14 @@ import { getStorage } from "firebase/storage";
 
 
 
-
-const firebaseConfig = {
-    apiKey: "AIzaSyCoe4NJdsMiiNCu7ozC8se0Gqnp8yRxwds",
-    authDomain: "snapstore-2a32e.firebaseapp.com",
-    projectId: "snapstore-2a32e",
-    storageBucket: "snapstore-2a32e.appspot.com",
-    messagingSenderId: "179768701524",
-    appId: "1:179768701524:web:b7f18766466f24ce7ef3c1",
-    measurementId: "G-3YZC27ED17"
+  const firebaseConfig = {
+    apiKey:process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId:process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   };
   
   const app = initializeApp(firebaseConfig);

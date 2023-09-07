@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./details.css";
@@ -6,6 +6,7 @@ import { db } from "../../../../firebaseConfig";
 
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { AttendenceContext } from "../../../../Context";
 
 export default function Details() {
   const [data, setData] = useState({
@@ -24,15 +25,25 @@ export default function Details() {
     adress: "",
     role: "",
   });
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
+  const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
+  
 
-  const handleChangeEvent = (event) => {
+  const handleChangeEvent = (event,val) => {
+    console.log(val)
+    console.log(event.target.value)
     const { name, value } = event.target;
     setData({ ...data, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (data.name && data.personalemail && data.mobile) {
+    if (data.name!="" && data.personalemail!="" && data.mobile!="") {
       try {
         await setDoc(doc(db, "userDetails", "id1"), data);
         console.log("Added");
@@ -60,13 +71,14 @@ export default function Details() {
     getDataFromFirebase();
   }, []);
 
+
   return (
     <div className="details-container">
       <form onSubmit={handleSubmit}>
         <div className="personal-details">
           <h4 className="details-heading">Personal Details</h4>
           <div className="input-container">
-            <label htmlFor="title">Title</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}  htmlFor="title">Title</label>
             <select
               id="title"
               name="title"
@@ -79,7 +91,7 @@ export default function Details() {
             </select>
           </div>
           <div className="input-container">
-            <label htmlFor="firstname">
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="firstname">
               First Name
               <span className="star-important">*</span>
             </label>
@@ -94,7 +106,7 @@ export default function Details() {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="middleName">Middle Name</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="middleName">Middle Name</label>
             <input
               name="middlename"
               id="middleName"
@@ -104,7 +116,7 @@ export default function Details() {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="lastname">
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="lastname">
               Last Name
               <span className="star-important">*</span>
             </label>
@@ -119,7 +131,7 @@ export default function Details() {
             />
           </div>
           <div className="input-container">
-            <label>Date of Birth</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}>Date of Birth</label>
             <input
               name="date"
               type="date"
@@ -129,7 +141,7 @@ export default function Details() {
             />
           </div>
           <div className="input-container">
-            <label>role</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}>role</label>
             <input
               name="role"
               type="text"
@@ -140,7 +152,7 @@ export default function Details() {
           </div>
 
           <div className="input-container">
-            <label htmlFor="gender">Gender</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="gender">Gender</label>
             <select
               name="gender"
               id="gender"
@@ -153,7 +165,7 @@ export default function Details() {
             </select>
           </div>
           <div className="input-container">
-            <label htmlFor="bloodgroup">Blood Group</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="bloodgroup">Blood Group</label>
             <select
               name="bloodgroup"
               id="bloodgroup"
@@ -166,7 +178,7 @@ export default function Details() {
             </select>
           </div>
           <div className="input-container">
-            <label htmlFor="religion">Religion</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="religion">Religion</label>
             <select
               name="religion"
               id="religion"
@@ -180,7 +192,7 @@ export default function Details() {
             </select>
           </div>
           <div className="input-container">
-            <label htmlFor="martialstatus">Martial Status</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} htmlFor="martialstatus">Martial Status</label>
             <select
               name="martialstatus"
               id="martialstatus"
@@ -197,39 +209,44 @@ export default function Details() {
           <h4 className="details-heading">Contact Details</h4>
 
           <div className="input-container">
-            <label className="mobile">
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`} className="mobile">
               Mobile
               <span className="star-important">*</span>
             </label>
             <div className="form-input">
               <PhoneInput
+              inputProps={{
+                name: 'mobile',
+                required: true,
+                autoFocus: true
+              }}
                 country={"us"}
-                name="mobile"
-                value="mobile"
-                onChange={(value) =>
-                  handleChangeEvent({ target: { name: "mobile" } })
-                }
+                value={data.mobile}
+                onChange={(value) => handleChangeEvent({ target: { name: "mobile", value } })}
+                
               />
             </div>
           </div>
           <div className="input-container">
-            <label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}>
               Work Phone
-              <span className="star-important">*</span>
             </label>
             <span className="form-input">
               <PhoneInput
+              inputProps={{
+                name: 'workphone',
+                required: true,
+                autoFocus: true
+              }}
                 country={"us"}
                 name="workphone"
-                value="workphone"
-                onChange={(value) =>
-                  handleChangeEvent({ target: { name: "workphone" } })
-                }
+                value={data.workphone}
+                onChange={(value) => handleChangeEvent({ target: { name: "mobile", value } })}
               />
             </span>
           </div>
           <div className="input-container">
-            <label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}>
               Personal Email
               <span className="star-important">*</span>
             </label>
@@ -242,7 +259,7 @@ export default function Details() {
             />
           </div>
           <div className="input-container">
-            <label>linkedIn</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}>linkedIn</label>
             <input
               name="linkedin"
               type="text"
@@ -252,7 +269,7 @@ export default function Details() {
             />
           </div>
           <div className="input-container">
-            <label>Permanent Adress</label>
+            <label className={`${themeval==="true"?"label-dark":"details-label"}`}>Permanent Adress</label>
             <textarea
               rows="5"
               cols="20"

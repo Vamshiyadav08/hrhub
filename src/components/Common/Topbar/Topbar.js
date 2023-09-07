@@ -13,6 +13,7 @@ import "react-toggle/style.css";
 import Toggle from 'react-toggle';
 
 
+
 const auth = getAuth();
 
 export default function Topbar() {
@@ -21,15 +22,21 @@ export default function Topbar() {
   const [CheckIn, setCheckIn] = useState(false);
   const [showDropdown, setdropdown] = useState(false);
   const [hamburgerbtn, sethamburgerBtn] = useState(false);
-  const [theme,setTheme] = useState(false);
 
+  const [theme,setthemeState] =useState(localStorage.getItem("themeVal"))
   const contextData = useContext(AttendenceContext);
+  useEffect(()=>{
+    const setTheme=(()=>{
+    localStorage.setItem("themeVal",theme)
+    }
+    )
+    setTheme()
+  },[theme])
 
   const handletheme=((event)=>{
-    console.log(event.target.checked,"top")
-    setTheme(event.target.checked)
+    // console.log(event.target.checked,"top")
     contextData.themeContext(event.target.checked)
-    
+    setthemeState(event.target.checked)
   })
 
   const [time, setTime] = useState("");
@@ -144,6 +151,7 @@ export default function Topbar() {
             <Toggle
             icons={false}
             onChange={handletheme}
+           
             />
           </label>
         </div>

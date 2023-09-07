@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext} from "react";
 import { BiEdit } from "react-icons/bi";
 import "./Bank.css";
 import "../Education/education.css";
 import { db } from "../../../../firebaseConfig";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-
+import { AttendenceContext } from "../../../../Context";
 export default function Bank() {
   const [state, setStateInput] = useState({
     bankname: "",
@@ -15,6 +15,15 @@ export default function Bank() {
     acctype: "",
     paymentmode: "",
   });
+
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
+  const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
+
   const handleInput = (event) => {
     const { name, value } = event.target;
     setStateInput({
@@ -57,7 +66,7 @@ export default function Bank() {
       <h3>Bank Account Details</h3>
       <form onSubmit={handlesubmit}>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor="" className={`${themeval==="true"?"label-dark":"bank-label"}`}>
             Name of Bank
             <span className="valid-check">*</span>
           </label>
@@ -70,7 +79,7 @@ export default function Bank() {
           />
         </div>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor="" className={`${themeval==="true"?"label-dark":"bank-label"}`}>
             Account No
             <span className="valid-check">*</span>
           </label>
@@ -83,7 +92,7 @@ export default function Bank() {
           />
         </div>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor="" className={`${themeval==="true"?"label-dark":"bank-label"}`}>
             IFSC Code
           </label>
           <input
@@ -95,7 +104,7 @@ export default function Bank() {
           />
         </div>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor="" className={`${themeval==="true"?"label-dark":"bank-label"}`}>
             Branch Adress
           </label>
           <input
@@ -107,7 +116,7 @@ export default function Bank() {
           />
         </div>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor="" className={`${themeval==="true"?"label-dark":"bank-label"}`}>
             Account Type
           </label>
           <input
@@ -119,7 +128,7 @@ export default function Bank() {
           />
         </div>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor="" className={`${themeval==="true"?"label-dark":"bank-label"}`}>
             Payment Mode
           </label>
           <input

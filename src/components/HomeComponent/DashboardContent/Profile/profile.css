@@ -30,8 +30,10 @@
     color: #888c9b;
     font-weight: 500;
 }
-.profile-details label{
+
+.profile-label{
     color: #393939;
     margin-bottom: 1rem;
+
 }
 

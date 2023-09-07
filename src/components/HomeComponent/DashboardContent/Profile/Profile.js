@@ -1,10 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig";
+import { AttendenceContext } from "../../../../Context";
 
 import "./profile.css";
 export default function Profile() {
   const [data, setData] = useState({});
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
+  const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
 
   useEffect(() => {
     const getDataFromFirebase = async () => {
@@ -43,17 +51,17 @@ export default function Profile() {
           <div>
             {data && (
               <>
-                <label>Name</label>
+                <label className={`${themeval==="true"?"label-dark":"profile-label"}`}>Name</label>
                 <p>{data.firstname}</p>
-                <label>Email</label>
+                <label className={`${themeval==="true"?"label-dark":"profile-label"}`}>Email</label>
                 <p>{data.personalemail}</p>
-                <label>Phone</label>
+                <label className={`${themeval==="true"?"label-dark":"profile-label"}`}>Phone</label>
                 <p>{data.mobile}</p>
-                <label>Address</label>
+                <label className={`${themeval==="true"?"label-dark":"profile-label"}`}>Address</label>
                 <p>{data.adress}</p>
-                <label>Date OF Birth</label>
+                <label className={`${themeval==="true"?"label-dark":"profile-label"}`}>Date OF Birth</label>
                 <p>{data.date}</p>
-                <label>Linkedin</label>
+                <label className={`${themeval==="true"?"label-dark":"profile-label"}`}>Linkedin</label>
                 <p>{data.linkedin}</p>
               </>
             )}

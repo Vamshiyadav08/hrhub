@@ -1,14 +1,23 @@
-import React from "react";
+import React,{useEffect,useState,useContext} from "react";
 import "./family.css";
+import { AttendenceContext } from "../../../../Context";
 
 export default function Family() {
   const handleInput = () => {};
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
+  const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
+
   return (
     <div>
       <h3>Bank Account Details</h3>
       <form>
         <div className="bank-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             Name
             <span className="valid-check">*</span>
           </label>
@@ -21,7 +30,7 @@ export default function Family() {
           />
         </div>
         <div className="family-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             RelationShip
             <span className="valid-check">*</span>
           </label>
@@ -34,7 +43,7 @@ export default function Family() {
           />
         </div>
         <div className="family-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             Date Of Birth
           </label>
           <input
@@ -46,7 +55,7 @@ export default function Family() {
           />
         </div>
         <div className="family-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             Gender
           </label>
           <input
@@ -58,7 +67,7 @@ export default function Family() {
           />
         </div>
         <div className="family-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             Occupation
           </label>
           <input
@@ -70,7 +79,7 @@ export default function Family() {
           />
         </div>
         <div className="family-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             Phone #
           </label>
           <input
@@ -82,7 +91,7 @@ export default function Family() {
           />
         </div>
         <div className="family-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"family-label"}`}>
             Address
           </label>
           <textarea rows="5" cols="20" name="adress" className="family-input" />

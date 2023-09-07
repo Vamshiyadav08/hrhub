@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { AiFillDashboard, AiFillCreditCard, AiFillHome } from "react-icons/ai";
 import { BsFillAlarmFill, BsHourglassSplit, BsCash } from "react-icons/bs";
 import { FaUserShield, FaBook, FaUsers,FaCubes,FaChalkboardTeacher } from "react-icons/fa";
@@ -31,16 +31,24 @@ const navItems = [
 export default function Leftbar() {
   const [activeTab, setActiveTab] = useState(null);
 
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
+  const { hamburgerData,theme } = useContext(AttendenceContext);
+
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
+
   const handleBtn = (clickedElement) => {
     console.log("clicked");
     setActiveTab(clickedElement);
   };
-  const { hamburgerData,theme } = useContext(AttendenceContext);
+  
   
 
   return (
     <aside
-      className={`${theme?"dark-theme": "aside-container"} ${
+      className={`${themeval==="true"?"dark-theme": "aside-container"} ${
         hamburgerData ? "aside-container-active" : "aside-container-hide"
       }`}
     >

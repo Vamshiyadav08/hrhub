@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import "./education.css";
 import { db } from "../../../../firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { nanoid } from "nanoid";
+import { AttendenceContext } from "../../../../Context";
 
 export default function Education() {
   const [state, setStateInput] = useState({
@@ -15,6 +16,14 @@ export default function Education() {
     gpa: "",
   });
   const [docsData, setDocsData] = useState([]);
+
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
+  const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -63,7 +72,7 @@ export default function Education() {
       <h3>Education Details</h3>
       <form onSubmit={handlesubmit}>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             Degree
             <span className="valid-check">*</span>
           </label>
@@ -76,7 +85,7 @@ export default function Education() {
           />
         </div>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             Specialization
             <span className="valid-check">*</span>
           </label>
@@ -89,7 +98,7 @@ export default function Education() {
           />
         </div>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             Collage/School
           </label>
           <input
@@ -101,7 +110,7 @@ export default function Education() {
           />
         </div>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             University
           </label>
           <input
@@ -113,7 +122,7 @@ export default function Education() {
           />
         </div>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             Year of Passing
           </label>
           <input
@@ -125,7 +134,7 @@ export default function Education() {
           />
         </div>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             Percentage
           </label>
           <input
@@ -137,7 +146,7 @@ export default function Education() {
           />
         </div>
         <div className="education-input-container">
-          <label htmlFor="" className="bank-label">
+          <label htmlFor=""className={`${themeval==="true"?"label-dark":"education-label"}`}>
             Address
           </label>
           <textarea

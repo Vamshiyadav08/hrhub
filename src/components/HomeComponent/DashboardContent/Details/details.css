@@ -15,7 +15,7 @@
 }
 
 
-label{
+.details-label{
    flex-basis: 30%;
    color: #393939;
    font-weight: 500;

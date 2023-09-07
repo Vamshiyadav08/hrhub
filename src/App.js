@@ -1,5 +1,5 @@
 import { ToastContainer } from "react-toastify";
-import React, { useContext, useEffect,useState} from "react";
+import React, { useContext,useEffect, useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/Login/Login";
@@ -20,13 +20,23 @@ import Admin from "./pages/Admin/Admin";
 import PageNotFound from "./components/Common/PageNotFound";
 import Search from "./components/Common/Topbar/Search/Search";
 import MyCalender from "./pages/Calender/Calender";
-import { AttendenceContext,AttendenceProvider } from "./Context";
+import { AttendenceContext } from "./Context";
+
+
 function App() {
- 
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
   const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
+
+ console.log(typeof(themeval))
+  
 
   return (
-    <div className={`${theme&&"dark-theme"}`}>
+    <div className={`${themeval==="true"&&"dark-theme"}`}>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/" element={<LayoutContainer />}>

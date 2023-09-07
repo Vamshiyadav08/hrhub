@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import "./dashboard.css";
 import { Link } from "react-router-dom";
 import { AttendenceContext } from "../../../Context";
+
 
 const navItems = [
   { id: "profile", label: "Profile" },
@@ -15,13 +16,20 @@ const navItems = [
 
 export default function HomeDashBoard() {
   const [activeTab, setActiveTab] = useState(null);
+  const [themeval,setthemestate]= useState(localStorage.getItem("themeVal"))
   const {theme} = useContext(AttendenceContext)
+  
+  useEffect(()=>{
+    let themee = localStorage.getItem("themeVal")
+    setthemestate(themee)
+  },[theme])
+ 
   const handleBtn = (clickedElement) => {
     setActiveTab(clickedElement);
   };
   return (
     <main className="home-component">
-      <aside className={`${theme?"dark-theme":"home-container"}`}>
+      <aside className={`${themeval==="true"?"dark-theme":"home-container"}`}>
         <nav className="home-nav">
           <ul>
             {navItems.map((eachItem) => (
