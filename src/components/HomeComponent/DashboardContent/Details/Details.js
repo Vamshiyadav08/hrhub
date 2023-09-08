@@ -3,7 +3,6 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./details.css";
 import { db } from "../../../../firebaseConfig";
-
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { AttendenceContext } from "../../../../Context";
@@ -280,7 +279,12 @@ export default function Details() {
             />
           </div>
         </div>
-        <button className="details-btn">Update</button>
+        {
+          data.length<1?<button className="details-btn">Save</button>
+          :<button className="details-btn">Update</button>
+
+        }
+        
       </form>
     </div>
   );

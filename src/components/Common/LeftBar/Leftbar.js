@@ -10,11 +10,11 @@ import "../Topbar/topbar.css";
 import "./leftbar.css";
 
 const navItems = [
-  { id: "dashboard", label: "DashBoard", icon: <AiFillDashboard /> },
   { id: "home", label: "My Home", icon: <AiFillHome /> },
   { id: "attendence", label: "Attendance", icon: <BsFillAlarmFill /> },
   { id: "calender", label: "Calendar", icon: <SlCalender /> },
   { id: "organizationchart", label: "Organizational Chart", icon: <FaUsers /> },
+  { id: "dashboard", label: "DashBoard", icon: <AiFillDashboard /> },
   { id: "leaves", label: "Leaves", icon: <FaUserShield /> },
   { id: "expence", label: "Expense", icon: <AiFillCreditCard /> },
   { id: "compensation", label: "Compensation", icon: <BsCash /> },

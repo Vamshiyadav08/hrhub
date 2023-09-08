@@ -22,10 +22,14 @@ export default function Skills() {
 
   const handleDelete = (uniqueid) => {
     // console.log(uniqueid)
-    let updatedArr = dataArray.filter((eachele) => {
-      return eachele.id !== uniqueid;
-    });
-    setdataArray(updatedArr);
+    if(dataArray.length===1){
+      return
+    }else{
+      let updatedArr = dataArray.filter((eachele) => {
+        return eachele.id !== uniqueid;
+      });
+      setdataArray(updatedArr);
+    }
   };
   function saveInput(index) {
     const updatedArr = [...dataArray];
@@ -38,11 +42,6 @@ export default function Skills() {
       setdataArray(updatedArr);
     }
   }
-
-  const removeInput = (index) => {
-    dataArray[index].text = "";
-  };
-
   const handleStar = (index, starIndex) => {
     console.log(index, starIndex);
     const updatedArr = [...dataArray];
@@ -104,12 +103,6 @@ export default function Skills() {
                   onMouseDown={() => saveInput(index)}
                 >
                   &#10004;{" "}
-                </button>
-                <button
-                  className="cross-btn"
-                  onMouseDown={() => removeInput(uniqueid)}
-                >
-                  &#10799;
                 </button>
               </div>
             )}
